@@ -48,8 +48,13 @@ const server = http.createServer(async( req, res) =>{
             throw new Error('Method not Accessible')
         }
     }catch(error){
+        if(error.message === '404 Page Not Found'){
+            res.writeHead(404, {'Content-Type':'text/html'})
+            res.end('<h2>404 Page Not Found<h2/>')
+        }else{
         res.writeHead(500, {'Content-type' : 'text/html'})
         res.end('Server error')
+        }
     }
 })
 
